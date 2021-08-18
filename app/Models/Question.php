@@ -9,7 +9,13 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'body'];
+
     function user(){
-        return $this->belongTo(User::class);
+        return $this->belongsTo(User::class);
+    }
+    function setTitleAttribute($value){
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = str_slug($value);
     }
 }
